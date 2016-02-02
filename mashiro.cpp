@@ -61,16 +61,14 @@ vector<MashiroColorWithCount> mashiro::pixels(Mat &image) noexcept {
     // 统计某种颜色出现的次数
     map<MashiroColor, std::uint32_t> colorCounter;
     
-    // 转为Mat_<Vec3b>以便于访问像素
-    Mat_<Vec3b> matrix = image;
-    
-    uint8_t r, g, b;
-    for(uint32_t y = 0; y < image.rows; y++) {
-        for (uint32_t x = 0; x < image.cols; x++) {
-            r = matrix(y, x)[R];
-            g = matrix(y, x)[G];
-            b = matrix(y, x)[B];
-            
+    // 直接使用C operator[]访问像素
+    Vec3b * pixel;
+    for(uint32_t i = 0; i < image.rows; ++i) {
+        pixel = image.ptr<Vec3b>(i);
+        for (uint32_t j = 0; j < image.cols; ++j) {
+            r = pixel[j][R];
+            g = pixel[j][G];
+            b = pixel[j][B];
             colorCounter[MashiroColor(r, g, b)]++;
         }
     }
