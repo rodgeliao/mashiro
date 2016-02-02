@@ -22,6 +22,7 @@ Using k-means cluster algorithm to computing the dominant colors of given image.
 		});
 
     The first parameter is the k in K-means cluster algorithm
+    
     The second parameter is a callback function, which gives the reference of the input image and clustered colors.
 
 ## Use as program
