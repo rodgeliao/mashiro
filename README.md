@@ -49,4 +49,4 @@ If everything is fine, you'll see
 ![Screenshot](https://raw.githubusercontent.com/BlueCocoa/mashiro/master/Screenshot.png)
 
 #### Link
-My [blog post](https://blog.0xbbc.com/2016/02/using-k-means-cluster-algorithm-to-computing-the-dominant-colors-of-given-image/)
+My [blog post](https://blog.0xbbc.com/2016/02/using-k-means-cluster-algorithm-to-compute-the-dominant-colors-of-given-image/)
