@@ -14,9 +14,9 @@ Using k-means cluster algorithm to computing the dominant colors of given image.
 		mashiro.color(3, [](cv::Mat& image, Cluster colors){
 		    for_each(colors.cbegin(), colors.cend(), [](const MashiroColor& color){
 		        cout<<"("
-		            <<std::get<mashiro::toType(MashiroColorRGBFields::Red)>(color)<<", "
-		            <<std::get<mashiro::toType(MashiroColorRGBFields::Green)>(color)<<", "
-		            <<std::get<mashiro::toType(MashiroColorRGBFields::Blue)>(color)<<")"
+		            <<color[0]<<", "
+		            <<color[1]<<", "
+		            <<color[2]<<")"
 		        <<endl;
 		    });
 		});

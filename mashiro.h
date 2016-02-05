@@ -9,6 +9,7 @@
 #ifndef MASHIRO_H
 #define MASHIRO_H
 
+#include <assert.h>
 #include <cmath>
 #include <float.h>
 #include <functional>
@@ -19,7 +20,12 @@
 #include <vector>
 #include "MersenneTwister.h"
 
+/**
+ *  @brief Forward
+ */
 namespace cv { class Mat; };
+class mashiro;
+class MashiroColor;
 
 /**
  RGB色彩空间
@@ -27,14 +33,9 @@ namespace cv { class Mat; };
 enum MashiroColorSpaceRGB { Red, Green, Blue };
 
 /**
- *  @brief 颜色
- */
-using MashiroColor = std::tuple<double, double, double>;
-
-/**
  *  @brief 颜色与其出现的次数
  */
-using MashiroColorWithCount = std::pair<std::tuple<double, double, double>, std::uint32_t>;
+using MashiroColorWithCount = std::pair<MashiroColor, std::uint32_t>;
 
 /**
  *  @brief 聚类后的颜色
@@ -54,7 +55,6 @@ using ClusteredPoint = std::map<std::uint32_t, std::vector<MashiroColorWithCount
  */
 using MashiroColorCallback = std::function<void(cv::Mat& image, const Cluster& colors)>;
 
-
 class mashiro {
 public:
     /**
@@ -68,7 +68,7 @@ public:
      *  @param number   需要几种主要颜色
      *  @param callback 聚类完成后的回调
      */
-    void color(std::uint32_t number, MashiroColorCallback callback) noexcept;
+    void color(std::uint32_t number, MashiroColorCallback callback, int convertColor = -1) noexcept;
     
     /**
      *  @brief 快速访问std::tuple里的元素
@@ -81,7 +81,7 @@ public:
     static constexpr auto toType(E enumerator) noexcept {
         return static_cast<std::underlying_type_t<E>>(enumerator);
     };
-private:
+    
     /**
      *  @brief 调整图片大小
      *
@@ -102,17 +102,6 @@ private:
      */
     static std::vector<MashiroColorWithCount> pixels(cv::Mat &image) noexcept;
     
-    /**
-     *  @brief 计算两个颜色的欧几里得距离
-     *
-     *  @discussion 仅限RGB
-     *
-     *  @param color1 Color 1
-     *  @param color2 Color 2
-     *
-     *  @return 两个颜色的欧几里得距离
-     */
-    static double euclidean(const MashiroColor& color1, const MashiroColor& color2) noexcept;
     
     /**
      *  @brief 给定一组带出现次数的颜色求其中心
@@ -122,7 +111,7 @@ private:
      *  @return 该组颜色的中心值
      */
     static MashiroColor center(const std::vector<MashiroColorWithCount>& colors) noexcept;
-
+private:
     /**
      *  @brief 需要处理的图像
      */
@@ -138,6 +127,94 @@ private:
      *  @return 聚类后的k个颜色
      */
     Cluster kmeans(const std::vector<MashiroColorWithCount>& pixels, std::uint32_t k, double min_diff = 1.0) noexcept;
+};
+
+/**
+ *  @brief 颜色
+ */
+class MashiroColor {
+public:
+    MashiroColor(double component1, double component2, double component3) noexcept;
+    
+    double operator [](int value) const {
+        assert((0 <= value && value <= 2));
+        return this->component[value];
+    }
+    
+    double & operator [](int index) {
+        assert((0 <= index && index <= 2));
+        return component[index];
+    }
+    
+    int operator < (const MashiroColor& color2) const {
+        const MashiroColor color1 = * this;
+        if (color1[0] < color2[0]) {
+            return -1;
+        } else if (color1[0] == color2[0]) {
+            if (color1[1] < color2[1]) {
+                return -1;
+            } else if (color1[1] == color2[1]) {
+                if (color1[2] < color2[2]) {
+                    return -1;
+                } else if (color1[2] == color2[2]) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            } else {
+                return 1;
+            }
+        } else {
+            return 1;
+        }
+    }
+    
+    /**
+     *  @brief 计算两个颜色的欧几里得距离
+     *
+     *  @discussion 仅限RGB
+     *
+     *  @param color1 Color 1
+     *  @param color2 Color 2
+     *
+     *  @return 两个颜色的欧几里得距离
+     */
+    static double euclidean(const MashiroColor& color1, const MashiroColor& color2) noexcept;
+    
+    /**
+     *  @brief 计算与另一个颜色的欧几里得距离
+     *
+     *  @discussion 仅限RGB
+     *
+     *  @param color1 Color 1
+     *  @param color2 Color 2
+     *
+     *  @return 两个颜色的欧几里得距离
+     */
+    double euclidean(const MashiroColor& color) noexcept;
+    
+    /**
+     *  @brief 将RGB颜色转为HSV颜色
+     *
+     *  @param color RGB颜色
+     *
+     *  @return HSV颜色
+     */
+    static const MashiroColor RGB2HSV(const MashiroColor& color) noexcept;
+    
+    /**
+     *  @brief 将HSV颜色转为RGB颜色
+     *
+     *  @param color HSV颜色
+     *
+     *  @return RGB颜色
+     */
+    static const MashiroColor HSV2RGB(const MashiroColor& color) noexcept;
+private:
+    /**
+     *  @brief RGB颜色分量
+     */
+    double component[3];
 };
 
 #endif /* MASHIRO_H */

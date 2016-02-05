@@ -14,10 +14,12 @@ using namespace std;
 
 mashiro::mashiro(Mat& _image) noexcept : image(_image) { }
 
-void mashiro::color(std::uint32_t number, MashiroColorCallback callback) noexcept {
+void mashiro::color(std::uint32_t number, MashiroColorCallback callback, int convertColor) noexcept {
     // 调整一下原始图像的大小
     Mat smallerImage;
     mashiro::resize(this->image, smallerImage, 200, 200, CV_INTER_LINEAR);
+    
+    if (convertColor != -1) cvtColor(smallerImage, smallerImage, convertColor);
     
     // 获取调整后的图像上每种颜色及其出现的次数
     vector<MashiroColorWithCount> pixels = mashiro::pixels(smallerImage);
@@ -83,17 +85,6 @@ vector<MashiroColorWithCount> mashiro::pixels(Mat &image) noexcept {
     return pixels;
 }
 
-double mashiro::euclidean(const MashiroColor &color1, const MashiroColor &color2) noexcept {
-    double distance = 0;
-    
-    // 欧几里得算法
-    distance += pow((std::get<mashiro::toType(MashiroColorSpaceRGB::Red)>(color1) - std::get<mashiro::toType(MashiroColorSpaceRGB::Red)>(color2)), 2);
-    distance += pow((std::get<mashiro::toType(MashiroColorSpaceRGB::Green)>(color1) - std::get<mashiro::toType(MashiroColorSpaceRGB::Green)>(color2)), 2);
-    distance += pow((std::get<mashiro::toType(MashiroColorSpaceRGB::Blue)>(color1) - std::get<mashiro::toType(MashiroColorSpaceRGB::Blue)>(color2)), 2);
-    
-    return sqrt(distance);
-}
-
 MashiroColor mashiro::center(const vector<MashiroColorWithCount> &colors) noexcept {
     map<double, double> vals;
     double plen = 0;
@@ -103,9 +94,9 @@ MashiroColor mashiro::center(const vector<MashiroColorWithCount> &colors) noexce
         plen += colorWithCount.second;
         
         MashiroColor color = colorWithCount.first;
-        vals[0] += std::get<mashiro::toType(MashiroColorSpaceRGB::Red)>(color) * colorWithCount.second;
-        vals[1] += std::get<mashiro::toType(MashiroColorSpaceRGB::Green)>(color) * colorWithCount.second;
-        vals[2] += std::get<mashiro::toType(MashiroColorSpaceRGB::Blue)>(color) * colorWithCount.second;
+        for (int i = 0; i < 3; i++) {
+            vals[i] += color[i] * colorWithCount.second;
+        }
     });
     
     vals[0] /= plen;
@@ -141,7 +132,7 @@ Cluster mashiro::kmeans(const vector<MashiroColorWithCount>& pixels, std::uint32
             double distance;
             uint32_t smallestIndex;
             for (uint32_t i = 0; i < k; i++) {
-                distance = mashiro::euclidean(color, clusters[i]);
+                distance = color.euclidean(clusters[i]);
                 
                 if (distance < smallestDistance) {
                     smallestDistance = distance;
@@ -157,7 +148,7 @@ Cluster mashiro::kmeans(const vector<MashiroColorWithCount>& pixels, std::uint32
             MashiroColor oldCenter = clusters[i];
             MashiroColor newCenter = mashiro::center(points[i]);
             clusters[i] = newCenter;
-            diff = max(diff, mashiro::euclidean(oldCenter, newCenter));
+            diff = max(diff, oldCenter.euclidean(newCenter));
         }
 
         // 当差距足够小时, 停止循环
@@ -167,4 +158,109 @@ Cluster mashiro::kmeans(const vector<MashiroColorWithCount>& pixels, std::uint32
     }
     
     return clusters;
+}
+
+MashiroColor::MashiroColor(double component1, double component2, double component3) noexcept {
+    this->component[0] = component1;
+    this->component[1] = component2;
+    this->component[2] = component3;
+}
+
+double MashiroColor::euclidean(const MashiroColor &color1, const MashiroColor &color2) noexcept {
+    double distance = 0;
+    
+    // 欧几里得算法
+    for (int i = 0; i < 3; i++) {
+        distance += pow(color1[i] - color2[i], 2);
+    }
+    
+    return sqrt(distance);
+}
+
+double MashiroColor::euclidean(const MashiroColor &color) noexcept {
+    return MashiroColor::euclidean(*this, color);
+}
+
+const MashiroColor MashiroColor::RGB2HSV(const MashiroColor& color) noexcept {
+    double R = color[0]/255.0, G = color[1]/255.0, B = color[2]/255.0;
+    double H, S, V;
+    double min, max, delta,tmp;
+    
+    tmp = R>G?G:R;
+    min = tmp>B?B:tmp;
+    tmp = R>G?R:G;
+    max = tmp>B?tmp:B;
+    V = (max + min) / 2;
+    delta = max - min;
+    
+    assert(max != 0);
+    assert(delta != 0);
+    S = delta / max;
+    
+    if (R == max) {
+        if (G >= B) {
+            H = (G - B) / delta; // between yellow & magenta
+        } else {
+            H = (G - B) / delta + 6.0;
+        }
+    } else if( G == max ) {
+        H = 2.0 + ( B - R ) / delta; // between cyan & yellow
+    } else if (B == max) {
+        H = 4.0 + ( R - G ) / delta; // between magenta & cyan
+    }
+            
+    H *= 60.0; // degrees
+            
+    return MashiroColor(H, S, V);
+}
+
+const MashiroColor MashiroColor::HSV2RGB(const MashiroColor& color) noexcept {
+    double hue = color[0], p, q, t, ff;
+    long i;
+    MashiroColor rgb(0.0, 0.0, 0.0);
+
+    assert(color[1] > 0.0);
+
+    if(hue > 360.0) hue = 0.0;
+    hue /= 60.0;
+    i = (long)hue;
+    ff = hue - i;
+    p = color[2] * (1.0 - color[1]);
+    q = color[2] * (1.0 - (color[1] * ff));
+    t = color[2] * (1.0 - (color[1] * (1.0 - ff)));
+    
+    switch(i) {
+        case 0:
+            rgb[0] = color[2];
+            rgb[1] = t;
+            rgb[2] = p;
+            break;
+        case 1:
+            rgb[0] = q;
+            rgb[1] = color[2];
+            rgb[2] = p;
+            break;
+        case 2:
+            rgb[0] = p;
+            rgb[1] = color[2];
+            rgb[2] = t;
+            break;
+        case 3:
+            rgb[0] = p;
+            rgb[1] = q;
+            rgb[2] = color[2];
+            break;
+        case 4:
+            rgb[0] = t;
+            rgb[1] = p;
+            rgb[2] = color[2];
+            break;
+        case 5:
+        default:
+            rgb[0] = color[2];
+            rgb[1] = p;
+            rgb[2] = q;
+            break;
+    }
+    return rgb;
 }
