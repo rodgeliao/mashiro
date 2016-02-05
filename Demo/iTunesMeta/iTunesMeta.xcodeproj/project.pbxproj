@@ -1,0 +1,311 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FE3657CD1C6483FE002397FA /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = FE3657CC1C6483FE002397FA /* main.mm */; };
+		FE3657D41C648492002397FA /* iTunesLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3657D31C648492002397FA /* iTunesLibrary.framework */; };
+		FE3657D91C648863002397FA /* mashiro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE3657D51C648863002397FA /* mashiro.cpp */; };
+		FE3657DA1C648863002397FA /* MersenneTwister.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE3657D71C648863002397FA /* MersenneTwister.cpp */; };
+		FE54C2021C6488B200160421 /* libopencv_core.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FE54C1FF1C6488B200160421 /* libopencv_core.3.0.0.dylib */; };
+		FE54C2031C6488B200160421 /* libopencv_imgcodecs.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FE54C2001C6488B200160421 /* libopencv_imgcodecs.3.0.0.dylib */; };
+		FE54C2041C6488B200160421 /* libopencv_imgproc.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FE54C2011C6488B200160421 /* libopencv_imgproc.3.0.0.dylib */; };
+		FE54C2061C648C1F00160421 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE54C2051C648C1F00160421 /* CoreGraphics.framework */; };
+		FE54C20A1C648C4400160421 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE54C2091C648C4400160421 /* AppKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FE3657C71C6483FE002397FA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FE3657C91C6483FE002397FA /* iTunesMeta */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = iTunesMeta; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE3657CC1C6483FE002397FA /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		FE3657D31C648492002397FA /* iTunesLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iTunesLibrary.framework; path = ../../../../Library/Frameworks/iTunesLibrary.framework; sourceTree = "<group>"; };
+		FE3657D51C648863002397FA /* mashiro.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mashiro.cpp; sourceTree = "<group>"; };
+		FE3657D61C648863002397FA /* mashiro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mashiro.h; sourceTree = "<group>"; };
+		FE3657D71C648863002397FA /* MersenneTwister.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MersenneTwister.cpp; sourceTree = "<group>"; };
+		FE3657D81C648863002397FA /* MersenneTwister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MersenneTwister.h; sourceTree = "<group>"; };
+		FE54C1FF1C6488B200160421 /* libopencv_core.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.3.0.0.dylib; path = ../../../../usr/local/lib/libopencv_core.3.0.0.dylib; sourceTree = "<group>"; };
+		FE54C2001C6488B200160421 /* libopencv_imgcodecs.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgcodecs.3.0.0.dylib; path = ../../../../usr/local/lib/libopencv_imgcodecs.3.0.0.dylib; sourceTree = "<group>"; };
+		FE54C2011C6488B200160421 /* libopencv_imgproc.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.3.0.0.dylib; path = ../../../../usr/local/lib/libopencv_imgproc.3.0.0.dylib; sourceTree = "<group>"; };
+		FE54C2051C648C1F00160421 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FE54C2091C648C4400160421 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FE3657C61C6483FE002397FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE54C20A1C648C4400160421 /* AppKit.framework in Frameworks */,
+				FE54C2061C648C1F00160421 /* CoreGraphics.framework in Frameworks */,
+				FE54C2021C6488B200160421 /* libopencv_core.3.0.0.dylib in Frameworks */,
+				FE54C2031C6488B200160421 /* libopencv_imgcodecs.3.0.0.dylib in Frameworks */,
+				FE54C2041C6488B200160421 /* libopencv_imgproc.3.0.0.dylib in Frameworks */,
+				FE3657D41C648492002397FA /* iTunesLibrary.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FE3657C01C6483FE002397FA = {
+			isa = PBXGroup;
+			children = (
+				FE54C20B1C64BE0800160421 /* Frameworks */,
+				FE3657CB1C6483FE002397FA /* iTunesMeta */,
+				FE3657CA1C6483FE002397FA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FE3657CA1C6483FE002397FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FE3657C91C6483FE002397FA /* iTunesMeta */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FE3657CB1C6483FE002397FA /* iTunesMeta */ = {
+			isa = PBXGroup;
+			children = (
+				FE3657CC1C6483FE002397FA /* main.mm */,
+				FE3657D51C648863002397FA /* mashiro.cpp */,
+				FE3657D61C648863002397FA /* mashiro.h */,
+				FE3657D71C648863002397FA /* MersenneTwister.cpp */,
+				FE3657D81C648863002397FA /* MersenneTwister.h */,
+			);
+			path = iTunesMeta;
+			sourceTree = "<group>";
+		};
+		FE54C20B1C64BE0800160421 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FE54C2091C648C4400160421 /* AppKit.framework */,
+				FE54C2051C648C1F00160421 /* CoreGraphics.framework */,
+				FE54C1FF1C6488B200160421 /* libopencv_core.3.0.0.dylib */,
+				FE54C2001C6488B200160421 /* libopencv_imgcodecs.3.0.0.dylib */,
+				FE54C2011C6488B200160421 /* libopencv_imgproc.3.0.0.dylib */,
+				FE3657D31C648492002397FA /* iTunesLibrary.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FE3657C81C6483FE002397FA /* iTunesMeta */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE3657D01C6483FE002397FA /* Build configuration list for PBXNativeTarget "iTunesMeta" */;
+			buildPhases = (
+				FE3657C51C6483FE002397FA /* Sources */,
+				FE3657C61C6483FE002397FA /* Frameworks */,
+				FE3657C71C6483FE002397FA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iTunesMeta;
+			productName = iTunesMeta;
+			productReference = FE3657C91C6483FE002397FA /* iTunesMeta */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FE3657C11C6483FE002397FA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = BlueCocoa;
+				TargetAttributes = {
+					FE3657C81C6483FE002397FA = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = FE3657C41C6483FE002397FA /* Build configuration list for PBXProject "iTunesMeta" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FE3657C01C6483FE002397FA;
+			productRefGroup = FE3657CA1C6483FE002397FA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FE3657C81C6483FE002397FA /* iTunesMeta */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FE3657C51C6483FE002397FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE3657CD1C6483FE002397FA /* main.mm in Sources */,
+				FE3657DA1C648863002397FA /* MersenneTwister.cpp in Sources */,
+				FE3657D91C648863002397FA /* mashiro.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FE3657CE1C6483FE002397FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FE3657CF1C6483FE002397FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FE3657D11C6483FE002397FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-std=c++14",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FE3657D21C6483FE002397FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-std=c++14",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FE3657C41C6483FE002397FA /* Build configuration list for PBXProject "iTunesMeta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE3657CE1C6483FE002397FA /* Debug */,
+				FE3657CF1C6483FE002397FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE3657D01C6483FE002397FA /* Build configuration list for PBXNativeTarget "iTunesMeta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE3657D11C6483FE002397FA /* Debug */,
+				FE3657D21C6483FE002397FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FE3657C11C6483FE002397FA /* Project object */;
+}
